@@ -1,4 +1,11 @@
+# Stage 1: Build stage
+FROM maven:3.8.4-openjdk-11 AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean package
+
+# Stage 2: Final stage
 FROM openjdk:latest
-COPY ./target/classes/com /tmp/com
 WORKDIR /tmp
-ENTRYPOINT ["java", "com.napier.sem.App"]
+COPY --from=build /app/target/seMethods-1.0-SNAPSHOT-jar-with-dependencies.jar /tmp/
+ENTRYPOINT ["java", "-jar", "seMethods-1.0-SNAPSHOT-jar-with-dependencies.jar"]
