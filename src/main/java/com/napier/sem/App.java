@@ -23,6 +23,8 @@ public class App {
         // Display Engineer details with salaries
         a.printSalaries(employees);
 
+        // Get Employee
+        Employee emp = a.getEmployee(255530);
 
         a.displayEmployees(employees);
 
